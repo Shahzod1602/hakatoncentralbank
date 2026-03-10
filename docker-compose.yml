@@ -5,21 +5,16 @@ services:
     build: ./backend
     container_name: fintrack-backend
     ports:
-      - "8080:8080"
+      - "8085:8080"
     volumes:
       - backend-data:/app/data
     restart: unless-stopped
-    healthcheck:
-      test: ["CMD", "wget", "-qO-", "http://localhost:8080/api/health"]
-      interval: 30s
-      timeout: 10s
-      retries: 3
 
   frontend:
     build: ./frontend
     container_name: fintrack-frontend
     ports:
-      - "80:80"
+      - "5500:80"
     depends_on:
       - backend
     restart: unless-stopped
