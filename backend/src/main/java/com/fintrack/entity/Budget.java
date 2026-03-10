@@ -28,10 +28,10 @@ public class Budget {
     @JoinColumn(name = "user_id", nullable = false)
     private User user;
 
-    @Column(name = "year", nullable = false)
+    @Column(name = "budget_year", nullable = false)
     private Integer year;
 
-    @Column(name = "month", nullable = false)
+    @Column(name = "budget_month", nullable = false)
     private Integer month;
 
     @Column(name = "category", nullable = false)
