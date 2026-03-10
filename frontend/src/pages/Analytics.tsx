@@ -64,9 +64,9 @@ export default function Analytics() {
   if (isLoading) return <LoadingSpinner className="h-64" />;
 
   return (
-    <div style={{ padding:'1.75rem', minHeight:'100vh', background:'var(--bg)' }}>
+    <div style={{ minHeight:'100vh', background:'var(--bg)' }} className="p-4 md:p-7">
       {/* Header */}
-      <div style={{ display:'flex', alignItems:'flex-end', justifyContent:'space-between', marginBottom:'1.5rem' }}>
+      <div className="flex flex-col sm:flex-row sm:items-end sm:justify-between gap-3 mb-6">
         <div>
           <h1 style={{ fontSize:'1.6rem', fontWeight:800 }}><span className="gradient-text">Analytics</span></h1>
           <p style={{ color:'var(--text-3)', fontSize:'0.82rem', marginTop:'4px' }}>Moliyaviy ma'lumotlaringizni vizuallashtiring</p>
@@ -79,7 +79,7 @@ export default function Analytics() {
       </div>
 
       {/* Summary */}
-      <div style={{ display:'grid', gridTemplateColumns:'repeat(3,1fr)', gap:'1rem', marginBottom:'1.25rem' }}>
+      <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 mb-5">
         {[
           { label:'Total Income',  val: Number(summary?.totalIncome||0),  color:'#34d399', bg:'rgba(16,185,129,0.1)',  border:'#10b981' },
           { label:'Total Expense', val: Number(summary?.totalExpense||0), color:'#fb7185', bg:'rgba(244,63,94,0.1)',   border:'#f43f5e' },
@@ -92,7 +92,7 @@ export default function Analytics() {
         ))}
       </div>
 
-      <div style={{ display:'grid', gridTemplateColumns:'1fr 1fr', gap:'1.25rem', marginBottom:'1.25rem' }}>
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-5 mb-5">
         {/* Pie Chart */}
         <div className="card">
           <div style={{ display:'flex', alignItems:'center', justifyContent:'space-between', marginBottom:'1rem' }}>

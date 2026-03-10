@@ -61,7 +61,7 @@ export default function Dashboard() {
   const totalBalance = accounts.reduce((sum, acc) => sum + Number(acc.balance), 0);
 
   return (
-    <div className="p-8 space-y-8">
+    <div className="p-4 md:p-8 space-y-4 md:space-y-8">
       {/* Header */}
       <div>
         <h1 className="text-2xl font-bold text-gray-900">Dashboard</h1>

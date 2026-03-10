@@ -102,15 +102,15 @@ export default function BudgetPage() {
   if (isLoading) return <LoadingSpinner className="h-64" />;
 
   return (
-    <div className="p-8 space-y-6">
-      <div className="flex items-center justify-between">
+    <div className="p-4 md:p-8 space-y-4 md:space-y-6">
+      <div className="flex items-start justify-between gap-4">
         <div>
           <h1 className="text-2xl font-bold text-gray-900">Budget</h1>
           <p className="text-gray-500 text-sm mt-1">Plan and track your monthly spending</p>
         </div>
-        <button onClick={openCreate} className="btn-primary flex items-center gap-2">
+        <button onClick={openCreate} className="btn-primary flex items-center gap-2 flex-shrink-0">
           <PlusIcon className="w-4 h-4" />
-          Add Budget
+          <span className="hidden sm:inline">Add Budget</span>
         </button>
       </div>
 
@@ -135,7 +135,7 @@ export default function BudgetPage() {
 
       {/* Summary */}
       {budgets.length > 0 && (
-        <div className="grid grid-cols-3 gap-4">
+        <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
           <div className="bg-blue-50 rounded-xl p-4">
             <p className="text-xs text-gray-500 font-medium">Total Planned</p>
             <p className="text-xl font-bold text-blue-700 mt-1">${totalPlanned.toLocaleString('en-US', { minimumFractionDigits: 0 })}</p>

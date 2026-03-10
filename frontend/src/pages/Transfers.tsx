@@ -79,7 +79,7 @@ export default function Transfers() {
   if (isLoading) return <LoadingSpinner className="h-64" />;
 
   return (
-    <div className="p-8 space-y-6">
+    <div className="p-4 md:p-8 space-y-4 md:space-y-6">
       <div className="flex items-center justify-between">
         <div>
           <h1 className="text-2xl font-bold text-gray-900">Transfers</h1>
@@ -100,6 +100,7 @@ export default function Transfers() {
         </div>
       ) : (
         <div className="card p-0 overflow-hidden">
+          <div className="overflow-x-auto">
           <table className="w-full">
             <thead>
               <tr className="border-b border-gray-50">
@@ -150,6 +151,7 @@ export default function Transfers() {
               ))}
             </tbody>
           </table>
+          </div>
         </div>
       )}
 

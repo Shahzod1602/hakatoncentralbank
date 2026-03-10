@@ -51,7 +51,7 @@ export default function Goals() {
   if (isLoading) return <LoadingSpinner className="h-64" />;
 
   return (
-    <div style={{ padding:'1.75rem', minHeight:'100vh', background:'var(--bg)' }}>
+    <div style={{ minHeight:'100vh', background:'var(--bg)' }} className="p-4 md:p-7">
       {/* Header */}
       <div style={{ display:'flex', alignItems:'flex-end', justifyContent:'space-between', marginBottom:'1.5rem' }}>
         <div>
@@ -63,7 +63,7 @@ export default function Goals() {
 
       {/* Stats */}
       {goals.length > 0 && (
-        <div style={{ display:'grid', gridTemplateColumns:'repeat(3,1fr)', gap:'1rem', marginBottom:'1.5rem' }}>
+        <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 mb-6">
           {[
             { label:'Jami maqsadlar', value:String(goals.length), color:'#818cf8' },
             { label:'Jami yig\'ilgan', value:`$${totalSaved.toLocaleString()}`, color:'#34d399' },

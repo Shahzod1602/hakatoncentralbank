@@ -72,13 +72,13 @@ export default function AiInsights() {
   if (isLoading) return <LoadingSpinner className="h-64" />;
 
   return (
-    <div style={{ padding:'1.75rem', minHeight:'100vh', background:'var(--bg)' }}>
+    <div style={{ minHeight:'100vh', background:'var(--bg)' }} className="p-4 md:p-7">
       <div style={{ marginBottom:'1.5rem' }}>
         <h1 style={{ fontSize:'1.6rem', fontWeight:800, lineHeight:1 }}><span className="gradient-text">AI Tahlil</span></h1>
         <p style={{ color:'var(--text-3)', fontSize:'0.82rem', marginTop:'4px' }}>Aqlli maslahatlar, moliyaviy sog'liq va valyuta kurslari</p>
       </div>
 
-      <div style={{ display:'grid', gridTemplateColumns:'1fr 2fr', gap:'1.25rem', marginBottom:'1.25rem' }}>
+      <div className="grid grid-cols-1 md:grid-cols-3 gap-5 mb-5">
         {/* Health Score */}
         {health && (
           <div className="card" style={{ textAlign:'center' }}>
@@ -97,7 +97,7 @@ export default function AiInsights() {
         )}
 
         {/* Insights */}
-        <div>
+        <div className="md:col-span-2">
           <p style={{ fontSize:'0.72rem', fontWeight:700, letterSpacing:'0.07em', textTransform:'uppercase', color:'var(--text-3)', marginBottom:'0.75rem' }}>Ogohlantirish va Maslahatlar</p>
           <div style={{ display:'flex', flexDirection:'column', gap:'0.75rem' }}>
             {insights.map((ins,i)=>{

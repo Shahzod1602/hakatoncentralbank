@@ -2,6 +2,7 @@ import React from 'react';
 import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
 import { AuthProvider, useAuth } from './context/AuthContext';
 import Sidebar from './components/Sidebar';
+import BottomNav from './components/BottomNav';
 import Login from './pages/Login';
 import Register from './pages/Register';
 import Dashboard from './pages/Dashboard';
@@ -26,10 +27,13 @@ function ProtectedRoute({ children }: { children: React.ReactNode }) {
 function AppLayout({ children }: { children: React.ReactNode }) {
   return (
     <div className="flex min-h-screen">
-      <Sidebar />
-      <main className="flex-1 bg-gray-50 dark:bg-[#0f172a] overflow-y-auto min-h-screen transition-colors">
+      <div className="hidden md:flex">
+        <Sidebar />
+      </div>
+      <main className="flex-1 bg-gray-50 dark:bg-[#0f172a] overflow-y-auto min-h-screen transition-colors pb-20 md:pb-0">
         {children}
       </main>
+      <BottomNav />
     </div>
   );
 }

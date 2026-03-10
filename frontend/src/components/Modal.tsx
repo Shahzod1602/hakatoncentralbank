@@ -26,7 +26,7 @@ export default function Modal({ isOpen, onClose, title, children, size = 'md' }:
       onClick={e => { if (e.target === e.currentTarget) onClose(); }}
     >
       <div
-        className={`w-full ${widths[size]} max-h-[90vh] overflow-y-auto`}
+        className={`w-full mx-4 sm:mx-0 ${widths[size]} max-h-[90vh] overflow-y-auto`}
         style={{
           background: 'linear-gradient(135deg, rgba(15,15,30,0.98), rgba(10,10,20,0.98))',
           border: '1px solid rgba(255,255,255,0.09)',

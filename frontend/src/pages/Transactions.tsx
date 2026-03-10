@@ -134,7 +134,7 @@ export default function Transactions() {
   const suggestedCategories = watchedType === 'INCOME' ? INCOME_CATEGORIES : EXPENSE_CATEGORIES;
 
   return (
-    <div className="p-8 space-y-6">
+    <div className="p-4 md:p-8 space-y-4 md:space-y-6">
       <div className="flex items-center justify-between">
         <div>
           <h1 className="text-2xl font-bold text-gray-900">Transactions</h1>
@@ -151,7 +151,7 @@ export default function Transactions() {
           </button>
           <button onClick={openCreate} className="btn-primary flex items-center gap-2">
             <PlusIcon className="w-4 h-4" />
-            Add Transaction
+            <span className="hidden sm:inline">Add Transaction</span>
           </button>
         </div>
       </div>
@@ -221,59 +221,94 @@ export default function Transactions() {
           </div>
         ) : (
           <>
-            <table className="w-full">
-              <thead>
-                <tr className="border-b border-gray-50">
-                  <th className="text-left text-xs font-semibold text-gray-400 uppercase tracking-wider px-6 py-4">Transaction</th>
-                  <th className="text-left text-xs font-semibold text-gray-400 uppercase tracking-wider px-6 py-4">Account</th>
-                  <th className="text-left text-xs font-semibold text-gray-400 uppercase tracking-wider px-6 py-4">Date</th>
-                  <th className="text-right text-xs font-semibold text-gray-400 uppercase tracking-wider px-6 py-4">Amount</th>
-                  <th className="text-right text-xs font-semibold text-gray-400 uppercase tracking-wider px-6 py-4">Actions</th>
-                </tr>
-              </thead>
-              <tbody className="divide-y divide-gray-50">
-                {data.content.map(tx => (
-                  <tr key={tx.id} className="hover:bg-gray-50 transition-colors">
-                    <td className="px-6 py-4">
-                      <div className="flex items-center gap-3">
-                        <div className={`w-9 h-9 rounded-xl flex items-center justify-center text-sm flex-shrink-0 ${
-                          tx.type === 'INCOME' ? 'bg-emerald-50 text-emerald-600' : 'bg-red-50 text-red-600'
-                        }`}>
-                          {tx.type === 'INCOME' ? '↑' : '↓'}
-                        </div>
-                        <div>
-                          <p className="text-sm font-medium text-gray-900">{tx.category || 'Uncategorized'}</p>
-                          {tx.description && <p className="text-xs text-gray-400">{tx.description}</p>}
-                        </div>
-                      </div>
-                    </td>
-                    <td className="px-6 py-4">
-                      <span className="text-sm text-gray-600">{tx.accountName}</span>
-                    </td>
-                    <td className="px-6 py-4">
-                      <span className="text-sm text-gray-500">{format(new Date(tx.date), 'MMM d, yyyy')}</span>
-                    </td>
-                    <td className="px-6 py-4 text-right">
-                      <span className={`text-sm font-semibold ${
-                        tx.type === 'INCOME' ? 'text-emerald-600' : 'text-red-600'
-                      }`}>
-                        {tx.type === 'INCOME' ? '+' : '-'}{tx.accountCurrency} {Number(tx.amount).toLocaleString('en-US', { minimumFractionDigits: 2 })}
-                      </span>
-                    </td>
-                    <td className="px-6 py-4">
-                      <div className="flex items-center justify-end gap-2">
-                        <button onClick={() => openEdit(tx)} className="p-1.5 hover:bg-gray-100 rounded-lg transition-colors">
-                          <PencilIcon className="w-4 h-4 text-gray-400" />
-                        </button>
-                        <button onClick={() => setDeletingTx(tx)} className="p-1.5 hover:bg-red-50 rounded-lg transition-colors">
-                          <TrashIcon className="w-4 h-4 text-red-400" />
-                        </button>
-                      </div>
-                    </td>
+            {/* Desktop table */}
+            <div className="hidden md:block">
+              <table className="w-full">
+                <thead>
+                  <tr className="border-b border-gray-50">
+                    <th className="text-left text-xs font-semibold text-gray-400 uppercase tracking-wider px-6 py-4">Transaction</th>
+                    <th className="text-left text-xs font-semibold text-gray-400 uppercase tracking-wider px-6 py-4">Account</th>
+                    <th className="text-left text-xs font-semibold text-gray-400 uppercase tracking-wider px-6 py-4">Date</th>
+                    <th className="text-right text-xs font-semibold text-gray-400 uppercase tracking-wider px-6 py-4">Amount</th>
+                    <th className="text-right text-xs font-semibold text-gray-400 uppercase tracking-wider px-6 py-4">Actions</th>
                   </tr>
-                ))}
-              </tbody>
-            </table>
+                </thead>
+                <tbody className="divide-y divide-gray-50">
+                  {data.content.map(tx => (
+                    <tr key={tx.id} className="hover:bg-gray-50 transition-colors">
+                      <td className="px-6 py-4">
+                        <div className="flex items-center gap-3">
+                          <div className={`w-9 h-9 rounded-xl flex items-center justify-center text-sm flex-shrink-0 ${
+                            tx.type === 'INCOME' ? 'bg-emerald-50 text-emerald-600' : 'bg-red-50 text-red-600'
+                          }`}>
+                            {tx.type === 'INCOME' ? '↑' : '↓'}
+                          </div>
+                          <div>
+                            <p className="text-sm font-medium text-gray-900">{tx.category || 'Uncategorized'}</p>
+                            {tx.description && <p className="text-xs text-gray-400">{tx.description}</p>}
+                          </div>
+                        </div>
+                      </td>
+                      <td className="px-6 py-4">
+                        <span className="text-sm text-gray-600">{tx.accountName}</span>
+                      </td>
+                      <td className="px-6 py-4">
+                        <span className="text-sm text-gray-500">{format(new Date(tx.date), 'MMM d, yyyy')}</span>
+                      </td>
+                      <td className="px-6 py-4 text-right">
+                        <span className={`text-sm font-semibold ${
+                          tx.type === 'INCOME' ? 'text-emerald-600' : 'text-red-600'
+                        }`}>
+                          {tx.type === 'INCOME' ? '+' : '-'}{tx.accountCurrency} {Number(tx.amount).toLocaleString('en-US', { minimumFractionDigits: 2 })}
+                        </span>
+                      </td>
+                      <td className="px-6 py-4">
+                        <div className="flex items-center justify-end gap-2">
+                          <button onClick={() => openEdit(tx)} className="p-1.5 hover:bg-gray-100 rounded-lg transition-colors">
+                            <PencilIcon className="w-4 h-4 text-gray-400" />
+                          </button>
+                          <button onClick={() => setDeletingTx(tx)} className="p-1.5 hover:bg-red-50 rounded-lg transition-colors">
+                            <TrashIcon className="w-4 h-4 text-red-400" />
+                          </button>
+                        </div>
+                      </td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
+
+            {/* Mobile card list */}
+            <div className="md:hidden divide-y divide-gray-100">
+              {data.content.map(tx => (
+                <div key={tx.id} className="flex items-center gap-3 px-4 py-3">
+                  <div className={`w-10 h-10 rounded-xl flex items-center justify-center text-sm flex-shrink-0 ${
+                    tx.type === 'INCOME' ? 'bg-emerald-50 text-emerald-600' : 'bg-red-50 text-red-600'
+                  }`}>
+                    {tx.type === 'INCOME' ? '↑' : '↓'}
+                  </div>
+                  <div className="flex-1 min-w-0">
+                    <p className="text-sm font-medium text-gray-900 truncate">{tx.category || 'Uncategorized'}</p>
+                    <p className="text-xs text-gray-400 truncate">
+                      {tx.description ? `${tx.description} · ` : ''}{tx.accountName} · {format(new Date(tx.date), 'MMM d')}
+                    </p>
+                  </div>
+                  <div className="flex items-center gap-2 flex-shrink-0">
+                    <span className={`text-sm font-semibold ${
+                      tx.type === 'INCOME' ? 'text-emerald-600' : 'text-red-600'
+                    }`}>
+                      {tx.type === 'INCOME' ? '+' : '-'}{tx.accountCurrency} {Number(tx.amount).toLocaleString('en-US', { minimumFractionDigits: 0 })}
+                    </span>
+                    <button onClick={() => openEdit(tx)} className="p-1.5 hover:bg-gray-100 rounded-lg transition-colors">
+                      <PencilIcon className="w-4 h-4 text-gray-400" />
+                    </button>
+                    <button onClick={() => setDeletingTx(tx)} className="p-1.5 hover:bg-red-50 rounded-lg transition-colors">
+                      <TrashIcon className="w-4 h-4 text-red-400" />
+                    </button>
+                  </div>
+                </div>
+              ))}
+            </div>
 
             {/* Pagination */}
             {data.totalPages > 1 && (

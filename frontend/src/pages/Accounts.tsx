@@ -129,7 +129,7 @@ export default function Accounts() {
   if (isLoading) return <LoadingSpinner className="h-64" />;
 
   return (
-    <div style={{ padding:'1.75rem', minHeight:'100vh', background:'var(--bg)' }}>
+    <div style={{ padding:'1rem', minHeight:'100vh', background:'var(--bg)' }} className="md:p-7">
       {/* Header */}
       <div style={{ display:'flex', alignItems:'flex-end', justifyContent:'space-between', marginBottom:'1.5rem' }}>
         <div>
