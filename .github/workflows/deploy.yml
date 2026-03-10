@@ -1,0 +1,29 @@
+name: Deploy to Server
+
+on:
+  push:
+    branches: [ main, master ]
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Deploy to server via SSH
+        uses: appleboy/ssh-action@v1.0.3
+        with:
+          host: ${{ secrets.SERVER_HOST }}
+          username: ${{ secrets.SERVER_USER }}
+          password: ${{ secrets.SERVER_PASSWORD }}
+          port: ${{ secrets.SERVER_PORT || 22 }}
+          script: |
+            cd /opt/fintrack
+            git pull origin main || (git clone https://github.com/Shahzod1602/hakatoncentralbank.git /opt/fintrack && cd /opt/fintrack)
+            docker compose down
+            docker compose build --no-cache
+            docker compose up -d
+            docker system prune -f
+            echo "Deployed successfully!"
